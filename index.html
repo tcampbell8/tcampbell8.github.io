@@ -1,18 +1,266 @@
+<!DOCTYPE html>
 <html>
-  <body>
-    <style>
-      html {
-        background: orange;
-      }
-    </style>
-    <h1>Welcome to the Football Analytics Toolbox & API</h1>
-    <h2><em> A website for exploratory football data analysis</em></h2>
-    <img src="http://www.rantsports.com/nfl/files/2014/10/Antonio-Brown-MNF.jpg" alt="Antonio Brown diving catch" height="250" width="500">
-    <h2>Try our DraftKings data API for the 2015 NFL Season</h2>
-    <p>To use the API, append the current URL in the following way: 'api/{<em>pos</em>}/{<em>week</em>}'</p>
-    <p>Where <em>pos</em> is one of the following: QB, RB, WR, TE or Def</p>
-    <p>and <em>week</em> is an integer 1-17.</p>
-    <p>For example, http://52.35.109.135:5000/QB/15 will give you the data for the quarterbacks in week 15.</p>
-    <h5>&copy; Tate James Campbell 2016</h5>
-  </body>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  <style type="text/css">
+    body {
+    font-family:"Helvetica Neue";
+    color: #686765;
+}
+.name {
+    float:right;
+    color:#27aae1;
+}
+.axis {
+    fill: none;
+    stroke: #AAA;
+    stroke-width: 1px;
+}
+text {
+    stroke: none;
+    fill: #666666;
+    font-size: .6em;
+    font-family:"Helvetica Neue"
+}
+.label {
+    fill: #414241;
+}
+.node {
+    cursor:pointer;
+}
+.dot {
+    opacity: .7;
+    cursor: pointer;
+}
+  </style>
+
+  <title>D3 Scatterplot - Loading by lolskee</title>
+<script type='text/javascript'>//<![CDATA[
+window.onload=function(){
+var chocolates = [{
+    "name": "GSW",
+        "conference": "West",
+        "off_pace": 13.5,
+        "def_pace": 15.1
+}, {
+    "name": "OKC",
+        "conference": "West",
+        "off_pace": 14.4,
+        "def_pace": 15.0
+}, {
+    "name": "CLE",
+        "conference": "East",
+        "off_pace": 15.6,
+        "def_pace": 14.9
+}, {
+    "name": "SAS",
+        "conference": "West",
+        "off_pace": 15.6,
+        "def_pace": 14.6
+}, {
+    "name": "TOR",
+        "conference": "East",
+        "off_pace": 16.0,
+        "def_pace": 14.7
+}, {
+    "name": "POR",
+        "conference": "West",
+        "off_pace": 15.0,
+        "def_pace": 14.6
+}, {
+    "name": "LAC",
+        "conference": "West",
+        "off_pace": 14.8,
+        "def_pace": 14.9
+}, {
+    "name": "HOU",
+        "conference": "West",
+        "off_pace": 14.0,
+        "def_pace": 15.2
+}, {
+    "name": "CHA",
+        "conference": "East",
+        "off_pace": 15.1,
+        "def_pace": 14.8
+}, {
+    "name": "DAL",
+        "conference": "West",
+        "off_pace": 15.4,
+        "def_pace": 14.7
+}, {
+    "name": "BOS",
+        "conference": "East",
+        "off_pace": 13.8,
+        "def_pace": 15.0
+}, {
+    "name": "SAC",
+        "conference": "West",
+        "off_pace": 13.9,
+        "def_pace": 14.6
+}, {
+    "name": "DET",
+        "conference": "East",
+        "off_pace": 15.0,
+        "def_pace": 14.9
+}, {
+    "name": "UTA",
+        "conference": "West",
+        "off_pace": 16.3,
+        "def_pace": 14.9
+}, {
+    "name": "MIA",
+        "conference": "East",
+        "off_pace": 15.5,
+        "def_pace": 14.9
+}, {
+    "name": "DEN",
+        "conference": "West",
+        "off_pace": 14.9,
+        "def_pace": 14.8
+}, {
+    "name": "ATL",
+        "conference": "East",
+        "off_pace": 14.2,
+        "def_pace": 15.1
+}, {
+    "name": "MIN",
+        "conference": "East",
+        "off_pace": 14.8,
+        "def_pace": 15.0
+}, {
+    "name": "MEM",
+        "conference": "East",
+        "off_pace": 15.7,
+        "def_pace": 14.8
+}, {
+    "name": "NOP",
+        "conference": "East",
+        "off_pace": 14.3,
+        "def_pace": 15.1
+}, {
+    "name": "WAS",
+        "conference": "East",
+        "off_pace": 13.8,
+        "def_pace": 15.2
+}, {
+    "name": "ORL",
+        "conference": "East",
+        "off_pace": 14.6,
+        "def_pace": 14.9
+}, {
+    "name": "NYK",
+        "conference": "East",
+        "off_pace": 15.6,
+        "def_pace": 14.8
+}, {
+    "name": "CHI",
+        "conference": "East",
+        "off_pace": 14.8,
+        "def_pace": 14.9
+}, {
+    "name": "MIL",
+        "conference": "East",
+        "off_pace": 14.8,
+        "def_pace": 15.3
+}, {
+    "name": "IND",
+        "conference": "East",
+        "off_pace": 14.6,
+        "def_pace": 14.8
+}, {
+    "name": "BKN",
+        "conference": "East",
+        "off_pace": 15.1,
+        "def_pace": 14.8
+}, {
+    "name": "PHX",
+        "conference": "West",
+        "off_pace": 14.4,
+        "def_pace": 14.4
+}, {
+    "name": "LAL",
+        "conference": "West",
+        "off_pace": 15.3,
+        "def_pace": 14.5
+}, {
+    "name": "PHI",
+        "conference": "East",
+        "off_pace": 14.8,
+        "def_pace": 14.2
+}];
+showScatterPlot(chocolates);
+function showScatterPlot(data) {
+    var margins = {
+        "left": 40,
+            "right": 30,
+            "top": 30,
+            "bottom": 30
+    };
+    
+    var width = 500;
+    var height = 500;
+    
+    var colors = d3.scale.category10();
+    var svg = d3.select("#scatter-load").append("svg").attr("width", width).attr("height", height).append("g")
+        .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+    var x = d3.scale.linear()
+        .domain(d3.extent(data, function (d) {
+        return d.off_pace;
+    }))
+        .range([0, width - margins.left - margins.right]);
+    var y = d3.scale.linear()
+        .domain(d3.extent(data, function (d) {
+        return d.def_pace;
+    }))
+    .range([height - margins.top - margins.bottom, 0]);
+    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y.range()[0] + ")");
+    svg.append("g").attr("class", "y axis");
+    svg.append("text")
+        .attr("fill", "#414241")
+        .attr("text-anchor", "end")
+        .attr("x", width / 2)
+        .attr("y", height - 35)
+        .text("Average Offensive Pace (seconds)");
+    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
+    var yAxis = d3.svg.axis().scale(y).orient("left").tickPadding(2);
+    svg.selectAll("g.y.axis").call(yAxis);
+    svg.selectAll("g.x.axis").call(xAxis);
+    var chocolate = svg.selectAll("g.node").data(data, function (d) {
+        return d.name;
+    });
+    var chocolateGroup = chocolate.enter().append("g").attr("class", "node")
+    .attr('transform', function (d) {
+        return "translate(" + x(d.off_pace) + "," + y(d.def_pace) + ")";
+    });
+    chocolateGroup.append("circle")
+        .attr("r", 5)
+        .attr("class", "dot")
+        .style("fill", function (d) {
+            return colors(d.conference);
+    });
+    chocolateGroup.append("text")
+        .style("text-anchor", "middle")
+        .attr("dy", -10)
+        .text(function (d) {
+            return d.name;
+    });
+}
+}//]]> 
+</script>
+
+  
+</head>
+
+<body>
+  <h3>2015-2016 NBA Season Average Offensive/Defensive Pace of Play</h3>
+
+
+<div id="scatter-load"></div>
+  
+</body>
+
 </html>
