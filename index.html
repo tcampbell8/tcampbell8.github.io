@@ -1,266 +1,153 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex, nofollow">
-  <script type="text/javascript" src="//d3js.org/d3.v3.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-  <style type="text/css">
-    body {
-    font-family:"Helvetica Neue";
-    color: #686765;
-}
-.name {
-    float:right;
-    color:#27aae1;
-}
-.axis {
-    fill: none;
-    stroke: #AAA;
-    stroke-width: 1px;
-}
-text {
-    stroke: none;
-    fill: #666666;
-    font-size: .6em;
-    font-family:"Helvetica Neue"
-}
-.label {
-    fill: #414241;
-}
-.node {
-    cursor:pointer;
-}
-.dot {
-    opacity: .7;
-    cursor: pointer;
-}
-  </style>
-
-  <title>D3 Scatterplot - Loading by lolskee</title>
-<script type='text/javascript'>//<![CDATA[
-window.onload=function(){
-var chocolates = [{
-    "name": "GSW",
-        "conference": "West",
-        "off_pace": 13.5,
-        "def_pace": 15.1
-}, {
-    "name": "OKC",
-        "conference": "West",
-        "off_pace": 14.4,
-        "def_pace": 15.0
-}, {
-    "name": "CLE",
-        "conference": "East",
-        "off_pace": 15.6,
-        "def_pace": 14.9
-}, {
-    "name": "SAS",
-        "conference": "West",
-        "off_pace": 15.6,
-        "def_pace": 14.6
-}, {
-    "name": "TOR",
-        "conference": "East",
-        "off_pace": 16.0,
-        "def_pace": 14.7
-}, {
-    "name": "POR",
-        "conference": "West",
-        "off_pace": 15.0,
-        "def_pace": 14.6
-}, {
-    "name": "LAC",
-        "conference": "West",
-        "off_pace": 14.8,
-        "def_pace": 14.9
-}, {
-    "name": "HOU",
-        "conference": "West",
-        "off_pace": 14.0,
-        "def_pace": 15.2
-}, {
-    "name": "CHA",
-        "conference": "East",
-        "off_pace": 15.1,
-        "def_pace": 14.8
-}, {
-    "name": "DAL",
-        "conference": "West",
-        "off_pace": 15.4,
-        "def_pace": 14.7
-}, {
-    "name": "BOS",
-        "conference": "East",
-        "off_pace": 13.8,
-        "def_pace": 15.0
-}, {
-    "name": "SAC",
-        "conference": "West",
-        "off_pace": 13.9,
-        "def_pace": 14.6
-}, {
-    "name": "DET",
-        "conference": "East",
-        "off_pace": 15.0,
-        "def_pace": 14.9
-}, {
-    "name": "UTA",
-        "conference": "West",
-        "off_pace": 16.3,
-        "def_pace": 14.9
-}, {
-    "name": "MIA",
-        "conference": "East",
-        "off_pace": 15.5,
-        "def_pace": 14.9
-}, {
-    "name": "DEN",
-        "conference": "West",
-        "off_pace": 14.9,
-        "def_pace": 14.8
-}, {
-    "name": "ATL",
-        "conference": "East",
-        "off_pace": 14.2,
-        "def_pace": 15.1
-}, {
-    "name": "MIN",
-        "conference": "East",
-        "off_pace": 14.8,
-        "def_pace": 15.0
-}, {
-    "name": "MEM",
-        "conference": "East",
-        "off_pace": 15.7,
-        "def_pace": 14.8
-}, {
-    "name": "NOP",
-        "conference": "East",
-        "off_pace": 14.3,
-        "def_pace": 15.1
-}, {
-    "name": "WAS",
-        "conference": "East",
-        "off_pace": 13.8,
-        "def_pace": 15.2
-}, {
-    "name": "ORL",
-        "conference": "East",
-        "off_pace": 14.6,
-        "def_pace": 14.9
-}, {
-    "name": "NYK",
-        "conference": "East",
-        "off_pace": 15.6,
-        "def_pace": 14.8
-}, {
-    "name": "CHI",
-        "conference": "East",
-        "off_pace": 14.8,
-        "def_pace": 14.9
-}, {
-    "name": "MIL",
-        "conference": "East",
-        "off_pace": 14.8,
-        "def_pace": 15.3
-}, {
-    "name": "IND",
-        "conference": "East",
-        "off_pace": 14.6,
-        "def_pace": 14.8
-}, {
-    "name": "BKN",
-        "conference": "East",
-        "off_pace": 15.1,
-        "def_pace": 14.8
-}, {
-    "name": "PHX",
-        "conference": "West",
-        "off_pace": 14.4,
-        "def_pace": 14.4
-}, {
-    "name": "LAL",
-        "conference": "West",
-        "off_pace": 15.3,
-        "def_pace": 14.5
-}, {
-    "name": "PHI",
-        "conference": "East",
-        "off_pace": 14.8,
-        "def_pace": 14.2
-}];
-showScatterPlot(chocolates);
-function showScatterPlot(data) {
-    var margins = {
-        "left": 40,
-            "right": 30,
-            "top": 30,
-            "bottom": 30
-    };
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>HTML5 template</title>
     
-    var width = 500;
-    var height = 500;
     
-    var colors = d3.scale.category10();
-    var svg = d3.select("#scatter-load").append("svg").attr("width", width).attr("height", height).append("g")
-        .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
-    var x = d3.scale.linear()
-        .domain(d3.extent(data, function (d) {
-        return d.off_pace;
-    }))
-        .range([0, width - margins.left - margins.right]);
-    var y = d3.scale.linear()
-        .domain(d3.extent(data, function (d) {
-        return d.def_pace;
-    }))
-    .range([height - margins.top - margins.bottom, 0]);
-    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y.range()[0] + ")");
-    svg.append("g").attr("class", "y axis");
-    svg.append("text")
-        .attr("fill", "#414241")
-        .attr("text-anchor", "end")
-        .attr("x", width / 2)
-        .attr("y", height - 35)
-        .text("Average Offensive Pace (seconds)");
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
-    var yAxis = d3.svg.axis().scale(y).orient("left").tickPadding(2);
-    svg.selectAll("g.y.axis").call(yAxis);
-    svg.selectAll("g.x.axis").call(xAxis);
-    var chocolate = svg.selectAll("g.node").data(data, function (d) {
-        return d.name;
-    });
-    var chocolateGroup = chocolate.enter().append("g").attr("class", "node")
-    .attr('transform', function (d) {
-        return "translate(" + x(d.off_pace) + "," + y(d.def_pace) + ")";
-    });
-    chocolateGroup.append("circle")
-        .attr("r", 5)
-        .attr("class", "dot")
-        .style("fill", function (d) {
-            return colors(d.conference);
-    });
-    chocolateGroup.append("text")
-        .style("text-anchor", "middle")
-        .attr("dy", -10)
-        .text(function (d) {
-            return d.name;
-    });
-}
-}//]]> 
-</script>
+    
+    
+        <link rel="stylesheet" href="css/style.css">
 
+    
+    
+    
+  </head>
+
+  <body>
+
+    <html>
+  <head>
   
-</head>
+    <meta charset="utf-8">
+		
+		<title>Page Title</title>
 
-<body>
-  <h3>2015-2016 NBA Season Average Offensive/Defensive Pace of Play</h3>
+		<!-- description text that displays below the link in google search results -->
+		<meta name="description" content="Description of site" /> 
+
+	</head>
+	
+	<body>
+		
+		<section class="page-wrap">
+
+	
+			<header> <!-- Defining the header section of the page with the appropriate tag -->
+				
+				<div>
+					<h1>blogskee</h1>
+					<p>A sports analytics blog by Tate Campbell.</p>
+				</div>
+
+				<nav> <!-- The nav link semantically marks your main site navigation -->
+					<ul>
+						<li><a href="#block1">intro</a></li>
+						<li><a href="#block2">articles</a></li>
+					</ul>
+				</nav>
 
 
-<div id="scatter-load"></div>
-  
-</body>
+			</header>
 
+	  
+			<article id="block1" class="module-block">
+			
+				<h2>Welcome to blogskee!</h2>
+				
+				<img class="right" src="https://dgfmssnschws7.cloudfront.net/sites/default/files/styles/rte_150x150/public/msan-student-tate-campbell.jpg?itok=NraeJBM4" alt="" />
+
+				<p>I’m Tate and I occasionally do some analysis on sports data. I’ll share some of my work here when time permits. Feel free to reach out to me on Twitter @lolskee. 
+</p>
+	
+			</article>
+			
+ 
+			<section id="block2" class="module-block">
+
+				<h2>latest posts</h2>
+				
+			   	<article class="post">
+					
+					<h3>
+						<a href="http://bl.ocks.org/tcampbell8/raw/18d4cbf01178d011f27c2f74b864d005/">
+NBA Play Sequence Sunburst Plot
+							<img src="http://i.imgur.com/V5ShYJ6.png?1" alt="" />
+						</a>
+					</h3>
+					
+					<strong class="date">4.30.2016</strong>
+					
+					<p>Check out this sunburst plot I made in D3 which displays the relative freqeuncies of play sequences which ended in a scoring plays during the 2011/2012 NBA Season. View the source code for this visualization on bl.ocks.org<a href="http://bl.ocks.org/tcampbell8/18d4cbf01178d011f27c2f74b864d005"> here</a>.</p>
+				
+				</article>
+<br>
+				<article class="post">						
+					
+					<h3>
+						<a href="http://bl.ocks.org/tcampbell8/raw/60bcc59d4ed5995d4d7dbc10a2669b9e/">
+NBA Pace of Play Scatterplot
+							<img src="http://i.imgur.com/bZv0AWq.png?1" alt="" />
+						</a>
+					</h3>
+					
+					<strong class="date">03.25.2016</strong>
+					
+					<p>A D3 scatterplot showing the average offensive and average defensive pace of play for every team in the league (NBA 2015/2016 season). Is anyone surprised that the Warriors lead the league in offensive pace? Didn’t think so. </p>
+				
+				</article>
+			
+			</section>
+
+			
+			<section class="page-wrap">
+
+				<h2>Links</h2>
+				
+				<section class="col">
+
+					<h3>Contact Info</h3>
+
+					<ul>
+						<li><a href="https://twitter.com/lolskee">Twitter</a></li>
+						<li><a href="https://www.linkedin.com/in/tcampbell8">LinkedIn</a></li>
+						<li><a href="https://www.facebook.com/tate.campbell.1">Facebook</a></li>
+						<li><a href="https://github.com/tcampbell8">GitHub</a></li>
+					</ul>
+
+				</section>
+
+				<section class="col">
+
+					<h3>Other Cool Links</h3>
+
+					<ul>
+						<li><a href="http://www.vegasinsider.com/">Vegas Insider</a></li>
+						<li><a href="http://nyloncalculus.com/">Nylon Calculus</a></li>
+						<li><a href="https://www.washingtonpost.com/graphics/business/wonk/housing/overview/?tid=ss_fb">The Divided American Dream</a></li>
+						<li><a href="http://playbook.draftkings.com/">DK Playbook</a></li>
+					</ul>
+
+				</section>
+	 		
+<br><br><br><br><br><br><br><br><br><br>
+
+			<h6>Copyright 2016 - <a href="tjc530@gmail.com">Tate Campbell</a></h6>
+
+        
+
+		</footer>
+	
+
+
+
+	</body>
+</html>
+    
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
 </html>
